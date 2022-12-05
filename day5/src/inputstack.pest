@@ -1,0 +1,14 @@
+letter = { 'A'..'Z' }
+digit = { '0' .. '9' }
+ws = _{ " " } // DO NOT define WHITESPACE as in the examples
+elfcrate = { "[" ~ letter ~ "]" }
+emptycrate = { "   " }
+rowbreak = _{ ("\r\n" | "\n") }
+craterow = { ((elfcrate|emptycrate) ~ws?)+ ~rowbreak }
+digitrow = { (ws+~digit~ws?)+ ~rowbreak }
+emptyrow = _{ rowbreak }
+moveamount = { "move" ~ws ~ digit+ }
+movefrom = { "from" ~ ws ~ digit+ }
+moveto = { "to" ~ ws ~ digit+ }
+moverow = { moveamount ~ ws ~movefrom ~ ws ~ moveto ~ rowbreak }
+file = { SOI ~ craterow+ ~ digitrow ~ emptyrow ~ moverow+ ~ EOI }
