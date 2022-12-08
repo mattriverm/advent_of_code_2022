@@ -1,0 +1,18 @@
+ws = _{" "}
+rowbreak = _{ ("\r\n"| "\n") }
+cmd_arg = { ("/" | ".." | 'a'..'z'+ ~ "."? ~ ws?) }
+cmd_start = _{ "$"~ws }
+cmd = {("cd"|"ls"|"dir")}
+command = { cmd~(ws?~cmd_arg?) }
+
+
+
+dirname = { 'a'..'z'+ }
+dir = { "dir"~ws~dirname }
+
+size = { '0'..'9'+ }
+filename = { ('a'..'z')+~("."~('a'..'z')+)? }
+file = { size~ws~filename }
+row = { (cmd_start ~ command|file|dir) }
+
+all = { SOI~(row~rowbreak?)+~EOI }
