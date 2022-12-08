@@ -291,7 +291,6 @@ mod tests {
             vec![Tree(3), Tree(5), Tree(3), Tree(9), Tree(0)],
         ]);
 
-        // for row in &forest.rows {i
         // First tree is always visible
         assert!(forest.visible_from_left_of_pos(0, 0));
         // 0 is less than 3
@@ -299,9 +298,6 @@ mod tests {
 
         // 3,3 is less than 5
         assert!(forest.visible_from_left_of_pos(2, 3));
-        // outer right, not visible from left but is farthest right so outer ring fuse should trigger
-        //assert!(forest.visible_from_left_of_pos(4, 4));
-        // dbg!(forest);
         assert!(!forest.visible_from_left_of_pos(2, 4));
     }
 
